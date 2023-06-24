@@ -1,0 +1,9 @@
+D:/Projects/HW03/Debug/CMakeFiles/untitled1.dir
+D:/Projects/HW03/Debug/CMakeFiles/edit_cache.dir
+D:/Projects/HW03/Debug/CMakeFiles/rebuild_cache.dir
+D:/Projects/HW03/Debug/CMakeFiles/list_install_components.dir
+D:/Projects/HW03/Debug/CMakeFiles/install.dir
+D:/Projects/HW03/Debug/CMakeFiles/install/local.dir
+D:/Projects/HW03/Debug/CMakeFiles/install/strip.dir
+D:/Projects/HW03/Debug/CMakeFiles/untitled1_autogen_timestamp_deps.dir
+D:/Projects/HW03/Debug/CMakeFiles/untitled1_autogen.dir
