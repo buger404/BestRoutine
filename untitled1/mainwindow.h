@@ -22,6 +22,10 @@ public:
 private slots:
     void on_calculateBtn_clicked();
 
+    void on_startSetBtn_clicked();
+
+    void on_endSetBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

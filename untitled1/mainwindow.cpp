@@ -9,15 +9,16 @@ int LoopCnt = 100;
 double* pheromone;
 double* base_pheromone;
 bool* ban;
-void UpdatePheromone(Routine* ants, int& s){
+void UpdatePheromone(Routine* ants, int& s, Attraction* des){
     for(int i = 0;i < s * 2;i++){
         if (ants[i].Data.empty())
             continue;
-        double f = ants[i].QualityCoefficient() / (s * 2);
+        if (&Routine::Attractions[ants[i].Data[ants[i].Data.size() - 1]] != des)
+            continue;
+        double f = ants[i].QualityCoefficient() / (s * 2.0) * 100.0;
         for(int j = 0;j < ants[i].Data.size() - 1;j++){
             pheromone[ants[i].Data[j] * s + ants[i].Data[j + 1]] += f;
         }
-        base_pheromone[ants[i].Data[0]] += f;
     }
 }
 void GoAnt(Routine &ant, int& s, double& money, double& energy, int start = -1){
@@ -61,13 +62,15 @@ void GoAnt(Routine &ant, int& s, double& money, double& energy, int start = -1){
 
         int stick = -1;
 
-        if (earliest != -1)
+        if (earliest != -1 && start == -1)
             goto skipDrawing;
 
         if (sum == 0)
         {
-            if (start != -1)
+            if (start != -1){
                 stick = start;
+                ant.Time = Routine::Attractions[stick].getOpenTime();
+            }
             else
                 stick = rand() % ant.Choices.size();
         }
@@ -100,7 +103,7 @@ void GoAnt(Routine &ant, int& s, double& money, double& energy, int start = -1){
         ant.Time += attraction.getPlayTime();
     }
 }
-Routine BestRoutine(double money, double energy){
+Routine BestRoutine(double money, double energy, Attraction* start, Attraction* des){
     int s = (int)Routine::Attractions.size();
     auto* ants = new Routine[s * 2];
     ban = new bool[s];
@@ -112,24 +115,26 @@ Routine BestRoutine(double money, double energy){
             base_pheromone[x] = 1;
         }
     }
+    int first = -1;
+    for(int i = 0;i < s;i++)
+        if (&Routine::Attractions[i] == start)
+            first = i;
 
     srand(time(nullptr));
     for(int i = 1;i <= LoopCnt;i++){
         for(int j = 0;j < s * 2;j++){
-            GoAnt(ants[j], s, money, energy);
+            GoAnt(ants[j], s, money, energy, first);
         }
-        UpdatePheromone(ants, s);
+        UpdatePheromone(ants, s, des);
     }
     Routine ret;
-    double max = -1;
-    int p = 0;
-    for(int i = 0;i < s;i++){
-        if (base_pheromone[i] > max){
-            max = base_pheromone[i];
-            p = i;
-        }
+    int fail = 0;
+    while((ret.Data.empty() || &Routine::Attractions[ret.Data[ret.Data.size() - 1]] != des) && fail < 5){
+        GoAnt(ret, s, money, energy, first);
+        fail++;
     }
-    GoAnt(ret, s, money, energy, p);
+    if (&Routine::Attractions[ret.Data[ret.Data.size() - 1]] != des)
+        ret.Data.clear();
     delete[] pheromone;
     delete[] ants;
     delete[] ban;
@@ -138,6 +143,8 @@ Routine BestRoutine(double money, double energy){
 }
 
 Ui::MainWindow* MainWindow::UI = nullptr;
+
+bool setMode = false;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -173,10 +180,52 @@ void MainWindow::on_calculateBtn_clicked()
         warning = " *请输入正确的迭代次数";
         goto last;
     }
-    ret = BestRoutine(money, energy);
+    if (Attraction::Start == nullptr){
+        warning = " *未设置起点";
+        goto last;
+    }
+    if (Attraction::End == nullptr){
+        warning = " *未设置终点";
+        goto last;
+    }
+    ret = BestRoutine(money, energy, Attraction::Start, Attraction::End);
     Routine::CurrentResult = ret;
+    if (ret.Data.empty())
+    {
+        ui->summary->setText("无法规划路线!");
+    }
+    else
+    {
+        ui->summary->setText(QString::asprintf("已规划路线，质量: %g, 得分: %g, 消耗金钱: %g, 共计路程: %g",
+                                               ret.QualityCoefficient(), ret.TotalScore(),
+                                               ret.MaxMoney - ret.RemainingMoney,
+                                               ret.MaxEnergy - ret.RemainingEnergy));
+    }
     ui->displayer->repaint();
 last:
     ui->warning->setText(warning);
+}
+
+
+void MainWindow::on_startSetBtn_clicked()
+{
+    auto ptr = Attraction::Selected;
+    if (Attraction::Start == ptr)
+        Attraction::Start = nullptr;
+    if (Attraction::End == ptr)
+        Attraction::End = nullptr;
+    Attraction::Start = ptr;
+    ui->displayer->repaint();
+}
+
+void MainWindow::on_endSetBtn_clicked()
+{
+    auto ptr = Attraction::Selected;
+    if (Attraction::Start == ptr)
+        Attraction::Start = nullptr;
+    if (Attraction::End == ptr)
+        Attraction::End = nullptr;
+    Attraction::End = ptr;
+    ui->displayer->repaint();
 }
 

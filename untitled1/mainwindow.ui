@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>745</width>
-    <height>431</height>
+    <height>439</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,8 +31,8 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>370</y>
-      <width>471</width>
+      <y>390</y>
+      <width>671</width>
       <height>20</height>
      </rect>
     </property>
@@ -45,14 +45,14 @@
      <string notr="true">color: white;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;使用鼠标&lt;span style=&quot; font-weight:700;&quot;&gt;左右拖拽&lt;/span&gt;以移动地图，在地图内使用&lt;span style=&quot; font-weight:700;&quot;&gt;鼠标滚轮&lt;/span&gt;以缩放地图&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;使用鼠标&lt;span style=&quot; font-weight:700;&quot;&gt;左右拖拽&lt;/span&gt;以移动地图，在地图内使用&lt;span style=&quot; font-weight:700;&quot;&gt;鼠标滚轮&lt;/span&gt;以缩放地图，点击圆圈选择地点&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="tipIcon">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>370</y>
+      <y>390</y>
       <width>21</width>
       <height>21</height>
      </rect>
@@ -467,12 +467,12 @@ border-radius: 20px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="calculateBtn_2">
+   <widget class="QPushButton" name="startSetBtn">
     <property name="geometry">
      <rect>
       <x>530</x>
       <y>20</y>
-      <width>191</width>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>
@@ -486,11 +486,7 @@ border-radius: 20px;</string>
 border-radius: 20px;</string>
     </property>
     <property name="text">
-     <string> 动画演示</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../Debug/animate (1).png</normaloff>../Debug/animate (1).png</iconset>
+     <string> 设置为起点</string>
     </property>
     <property name="iconSize">
      <size>
@@ -539,12 +535,66 @@ border: 0px;</string>
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="endSetBtn">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>20</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(142,197,252);
+border-radius: 20px;</string>
+    </property>
+    <property name="text">
+     <string>设置为终点</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="summary">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>701</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;</string>
+    </property>
+    <property name="text">
+     <string>等待路线规划...</string>
+    </property>
+   </widget>
    <zorder>frame</zorder>
    <zorder>tip</zorder>
    <zorder>tipIcon</zorder>
    <zorder>frame_2</zorder>
-   <zorder>calculateBtn_2</zorder>
+   <zorder>startSetBtn</zorder>
    <zorder>frame_3</zorder>
+   <zorder>endSetBtn</zorder>
+   <zorder>summary</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

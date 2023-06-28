@@ -1,5 +1,6 @@
 #include "hw03.h"
 #include "mainwindow.h"
+#include "displayer.h"
 
 #include <QApplication>
 
@@ -53,6 +54,7 @@ void Initialize(const string& path){
         Routine::Attractions.push_back(*attraction);
     stream.close();
     qDebug() << "Loaded " << Routine::Attractions.size() << " attractions.";
+    Attraction::Selected = &Routine::Attractions[0];
 }
 
 int main(int argc, char *argv[])

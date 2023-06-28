@@ -4,7 +4,7 @@ CloseTime: 17:00
 PlayTime: 1:30
 Score: 10.0
 Price: 30
-Position: 5,10
+Position: 2,2
 --- B
 OpenTime: 17:00
 CloseTime: 19:00

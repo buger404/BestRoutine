@@ -1,4 +1,9 @@
 #include "hw03.h"
+Attraction* Attraction::Start = nullptr;
+Attraction* Attraction::End = nullptr;
+Attraction* Attraction::Selected = nullptr;
+Attraction* Attraction::Hover = nullptr;
+
 double Attraction::Distance(const Attraction& other) {
     return sqrt(pow(X - other.X, 2) + pow(Y - other.Y, 2));
 }

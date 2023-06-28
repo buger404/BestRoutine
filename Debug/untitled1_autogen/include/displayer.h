@@ -12,8 +12,10 @@ class AttractionDisplayer : public QWidget
     Q_OBJECT
 private:
     QImage icon = QImage("pos.png");
-    QPen titlePen = QPen(qRgb(200, 210, 210));
-    QPen contentPen = QPen(qRgb(140, 150, 150));
+    QImage icon2 = QImage("pos2.png");
+    QPen titlePen = QPen(qRgb(200, 200, 200));
+    QPen contentPen = QPen(qRgb(140, 140, 140));
+    QPen routinePen = QPen(qRgb(130, 243, 169));
     double scaleFactor = 1;
     double xPitch = 0, yPitch = 0;
 public:

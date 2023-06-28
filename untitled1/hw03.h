@@ -30,6 +30,7 @@ public:
     void setY(double y);
     double Distance(const Attraction&);
     bool IsOpen(Time);
+    static Attraction *Start, *End, *Selected, *Hover;
 };
 class Routine{
 public:
