@@ -28,6 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    bool event(QEvent *e) override;
 };
 
 #endif // MAINWINDOW_H

@@ -17,7 +17,6 @@ void AttractionDisplayer::calculateDisplayPosition(Attraction& a, double& x, dou
 void AttractionDisplayer::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-
     QRect rect(0,0,width(),height());
     p.setViewport(rect);
 

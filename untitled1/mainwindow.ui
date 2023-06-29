@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>745</width>
-    <height>439</height>
+    <height>447</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>745</width>
+    <height>447</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>一日游路线规划</string>
@@ -27,6 +33,12 @@
    <string notr="true">background: rgb(64,64,64);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QLabel" name="tip">
     <property name="geometry">
      <rect>
@@ -401,14 +413,109 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="startSetBtn">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>20</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(142,197,252);
+border-radius: 20px;</string>
+    </property>
+    <property name="text">
+     <string> 设置为起点</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="endSetBtn">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>20</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(142,197,252);
+border-radius: 20px;</string>
+    </property>
+    <property name="text">
+     <string>设置为终点</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="summary">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>701</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;</string>
+    </property>
+    <property name="text">
+     <string>等待路线规划...</string>
+    </property>
+   </widget>
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>481</width>
-      <height>41</height>
+      <width>479</width>
+      <height>43</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>1</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>43</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(84,84,84);
@@ -467,43 +574,12 @@ border-radius: 20px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="startSetBtn">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>20</y>
-      <width>91</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(142,197,252);
-border-radius: 20px;</string>
-    </property>
-    <property name="text">
-     <string> 设置为起点</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>80</y>
-      <width>481</width>
+      <y>78</y>
+      <width>479</width>
       <height>271</height>
      </rect>
     </property>
@@ -520,11 +596,17 @@ border-radius: 20px;</string>
     <widget class="AttractionDisplayer" name="displayer" native="true">
      <property name="geometry">
       <rect>
-       <x>-1</x>
-       <y>-1</y>
+       <x>0</x>
+       <y>0</y>
        <width>483</width>
        <height>273</height>
       </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
      </property>
      <property name="mouseTracking">
       <bool>true</bool>
@@ -535,66 +617,14 @@ border: 0px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="endSetBtn">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>20</y>
-      <width>91</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(142,197,252);
-border-radius: 20px;</string>
-    </property>
-    <property name="text">
-     <string>设置为终点</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="summary">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>360</y>
-      <width>701</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string>等待路线规划...</string>
-    </property>
-   </widget>
    <zorder>frame</zorder>
    <zorder>tip</zorder>
    <zorder>tipIcon</zorder>
-   <zorder>frame_2</zorder>
    <zorder>startSetBtn</zorder>
-   <zorder>frame_3</zorder>
    <zorder>endSetBtn</zorder>
    <zorder>summary</zorder>
+   <zorder>frame_2</zorder>
+   <zorder>frame_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

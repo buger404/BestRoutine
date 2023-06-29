@@ -166,12 +166,12 @@ void MainWindow::on_calculateBtn_clicked()
     double money, energy;
     bool ok;
     money = ui->money->toPlainText().toDouble(&ok);
-    if (!ok){
+    if (!ok || money <= 0){
         warning = " *请输入正确的预算金额";
         goto last;
     }
     energy = ui->energy->toPlainText().toDouble(&ok);
-    if (!ok){
+    if (!ok || energy <= 0){
         warning = " *请输入正确的最长路程";
         goto last;
     }
@@ -229,3 +229,56 @@ void MainWindow::on_endSetBtn_clicked()
     ui->displayer->repaint();
 }
 
+struct UIFactors{
+    double x, y, w, h, f;
+};
+int orWidth, orHeight;
+map<QWidget*, UIFactors> uiFactors;
+
+void SetUIFactor(QWidget* w){
+    UIFactors factor;
+    factor.x = w->pos().x() * 1.0 / orWidth;
+    factor.y = w->pos().y() * 1.0 / orHeight;
+    factor.w = w->size().width() * 1.0 / orWidth;
+    factor.h = w->size().height() * 1.0 / orHeight;
+    factor.f = w->font().pointSizeF() * 1.0 / orHeight;
+    uiFactors[w] = factor;
+    for(auto &u:w->children()){
+        if (!u->isWidgetType())
+            continue;
+        SetUIFactor((QWidget*)u);
+    }
+}
+
+void ScaleByFactor(QWidget* w, double wFactor, double hFactor){
+    UIFactors factor = uiFactors[w];
+    w->move(QPoint(factor.x * wFactor, factor.y * hFactor));
+    w->resize(QSize(factor.w * wFactor, factor.h * hFactor));
+    QFont f = w->font();
+    f.setPointSizeF(factor.f * hFactor);
+    w->setFont(f);
+    for(auto &u:w->children()){
+        if (!u->isWidgetType())
+            continue;
+        ScaleByFactor((QWidget*)u, wFactor, hFactor);
+    }
+}
+
+bool MainWindow::event(QEvent *e){
+    if(e->type() == QEvent::Resize)
+    {
+        QResizeEvent *args = static_cast<QResizeEvent*>(e);
+        if (args->oldSize().isEmpty()){
+            orWidth = args->size().width();
+            orHeight = args->size().height();
+            SetUIFactor(ui->centralwidget);
+            goto last;
+        }
+
+        double wFactor = args->size().width() * 1.0;
+        double hFactor = args->size().height() * 1.0;
+        ScaleByFactor(ui->centralwidget, wFactor, hFactor);
+    }
+    last:
+    return QMainWindow::event(e);
+}
